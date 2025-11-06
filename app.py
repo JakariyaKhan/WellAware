@@ -144,78 +144,10 @@ else:
                     </div>
                 """, unsafe_allow_html=True)
 
-    # -------------------------------
-    # Heart Disease
-    # -------------------------------
-    with st.expander("❤️ Heart Disease Prediction"):
-        age = st.slider("Age", 20, 100, 40)
-        sex = st.selectbox("Sex", ("Male", "Female"))
-        cp = st.slider("Chest Pain Type (0-3)", 0, 3, 1)
-        trestbps = st.slider("Resting Blood Pressure", 80, 200, 120)
-        chol = st.slider("Cholesterol", 100, 600, 200)
-        fbs = st.selectbox("Fasting Blood Sugar > 120 mg/dl", (0, 1))
-        restecg = st.slider("Resting ECG (0-2)", 0, 2, 1)
-        thalach = st.slider("Max Heart Rate", 70, 210, 150)
-        exang = st.selectbox("Exercise Induced Angina", (0, 1))
-        oldpeak = st.slider("Oldpeak", 0.0, 6.0, 1.0)
-        slope = st.slider("Slope (0-2)", 0, 2, 1)
-        ca = st.slider("Major Vessels (0-4)", 0, 4, 0)
-        thal = st.slider("Thalassemia (0-3)", 0, 3, 1)
-
-        model = load_model("heart")
-        input_data = (age, 1 if sex == "Male" else 0, cp, trestbps, chol, fbs,
-                      restecg, thalach, exang, oldpeak, slope, ca, thal)
-
-        if st.button("🔍 Predict Heart Disease"):
-            result, prob = predict(model, input_data)
-            if result == 1:
-                st.markdown(f"""
-                    <div style="background-color:#ffcccc;padding:20px;border-radius:10px;text-align:center">
-                        <h2 style="color:red;">⚠️ You are likely to have Heart Disease</h2>
-                        <p style="color:black;">Probability: {prob:.2f}%</p>
-                    </div>
-                """, unsafe_allow_html=True)
-            else:
-                st.markdown(f"""
-                    <div style="background-color:#ccffcc;padding:20px;border-radius:10px;text-align:center">
-                        <h2 style="color:green;">🎉 You are not likely to have Heart Disease</h2>
-                        <p style="color:black;">Probability: {prob:.2f}%</p>
-                    </div>
-                """, unsafe_allow_html=True)
-
-    # -------------------------------
-    # Cancer
-    # -------------------------------
-    with st.expander("🧬 Cancer Prediction"):
-        mean_radius = st.slider("Mean Radius", 5.0, 30.0, 14.0)
-        mean_texture = st.slider("Mean Texture", 10.0, 40.0, 20.0)
-        mean_perimeter = st.slider("Mean Perimeter", 50.0, 200.0, 100.0)
-        mean_area = st.slider("Mean Area", 100.0, 2500.0, 500.0)
-        mean_smoothness = st.slider("Mean Smoothness", 0.05, 0.2, 0.1)
-
-        model = load_model("cancer")
-        input_data = (mean_radius, mean_texture, mean_perimeter, mean_area, mean_smoothness)
-
-        if st.button("🔍 Predict Cancer"):
-            result, prob = predict(model, input_data)
-            if result == 1:
-                st.markdown(f"""
-                    <div style="background-color:#ffcccc;padding:20px;border-radius:10px;text-align:center">
-                        <h2 style="color:red;">⚠️ You are likely to have Cancer</h2>
-                        <p style="color:black;">Probability: {prob:.2f}%</p>
-                    </div>
-                """, unsafe_allow_html=True)
-            else:
-                st.markdown(f"""
-                    <div style="background-color:#ccffcc;padding:20px;border-radius:10px;text-align:center">
-                        <h2 style="color:green;">🎉 You are not likely to have Cancer</h2>
-                        <p style="color:black;">Probability: {prob:.2f}%</p>
-                    </div>
-                """, unsafe_allow_html=True)
 
 # -------------------------------
 # Footer
 # -------------------------------
 st.markdown("<br>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center;color:grey;font-size:12px;'>EAM ALBATROSS</p>",
+st.markdown("<p style='text-align:center;color:grey;font-size:12px;'>TEAM ALBATROSS</p>",
             unsafe_allow_html=True)
