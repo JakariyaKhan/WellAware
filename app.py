@@ -73,6 +73,31 @@ def predict(model, input_data, scaler=None):
         prob = model.predict_proba(x)[0][1] * 100
     return result, prob
 
+
+def chat_with_ai_doctor(user_input):
+    client = genai.Client(api_key=GEMINI_API_KEY)
+    system_prompt = (
+        "You are AI Doctor, created by Shahe Aalam Ansari. "
+        "Answer briefly in English or Hinglish, and always advise the user to consult a real doctor."
+    )
+    contents = [
+        types.Content(role="system", parts=[types.Part(text=system_prompt)]),
+        types.Content(role="user", parts=[types.Part(text=user_input)])
+    ]
+
+    response = ""
+    for chunk in client.models.generate_content_stream(
+        model="gemini-2.5-flash",
+        contents=contents
+    ):
+        if chunk.candidates and chunk.candidates[0].content.parts:
+            response += chunk.candidates[0].content.parts[0].text
+    return response.strip()
+
+# Example run
+if __name__ == "__main__":
+    print(chat_with_ai_doctor("I have fever and cough, what should I do?"))
+
 st.header("🩺 Disease Predictions")
 
 
