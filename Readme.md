@@ -1,54 +1,108 @@
-# WellAware AI
-## A full Streamlit-based healthcare app integrating ML disease prediction (Diabetes, Heart), Gemini-based AI chat,
-# WellAware AI
+# 🧠 Wellness Guide AI: Disease Prediction & Health Assistant
 
-A Streamlit-based healthcare app that integrates machine learning disease prediction (Diabetes, Heart planned) with a Gemini-based AI chat assistant.
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Streamlit](https://img.shields.io/badge/Streamlit-App-red.svg)](https://streamlit.io/)
+[![Gemini AI](https://img.shields.io/badge/Gemini-2.5_Flash-green.svg)](https://ai.google.dev/)
 
-## Features
-- Interactive disease prediction UI built with `streamlit`.
-- Diabetes prediction using a serialized ML model (`models/diabetes.pkl`) with optional scaler.
-- Prototype Gemini chat integration (server-side) using `google-genai` (chat feature marked "Coming Soon" in UI).
-- Clean, responsive UI and model loading with caching.
+A smart, interactive health assistant built with Streamlit, Gemini AI, and machine learning. This project allows users to check their risk for diabetes and chat with a friendly AI wellness guide for health tips and medical advice.
 
-## Repository layout
-- `app.py` — Main Streamlit app (UI, model loader `load_model`, prediction `predict`, and `chat_with_ai_doctor`).
-- `ChatWithAI.py` — Minimal example showing how to call Gemini via `google-genai`.
-- `models/` — Directory for pickled model files (e.g., `diabetes.pkl`).
-- `README.md` — This file.
+---
 
-## Quick start (macOS)
-1. Create and activate a virtual environment:
-   - `python3 -m venv .venv`
-   - `source .venv/bin/activate`
+## 🧪 Demo Preview
 
-2. Install dependencies:
-   - `pip install streamlit numpy google-genai scikit-learn`
+> 🖥️ Displays a clean, centered dashboard with:
+> - 🩺 Diabetes risk prediction using ML model
+> - 💬 Chat interface with Gemini-powered Wellness Guide AI
+> - 🎯 Probability-based health insights
+> - 📊 Sliders for user-friendly input of health metrics
 
-3. Configure the Gemini API key securely (do not hard-code in files):
-   - `export GEMINI_API_KEY="YOUR_GEMINI_API_KEY"`
+---
 
-4. Ensure models are available:
-   - Place model pickles in `models/` (e.g., `models/diabetes.pkl`).
-   - Supported pickle shape: either a plain model object or a `dict` with keys: `model`, `scaler`, `accuracy`, `f1`.
+## 🚀 Features
 
-5. Run the app:
-   - `streamlit run app.py`
+- ✅ ML-based diabetes prediction using pre-trained model
+- 💬 Gemini-powered AI chat for wellness guidance
+- 📈 Probability score for prediction confidence
+- 🧠 Friendly, professional health assistant persona
+- 🧩 Modular code with clear separation of logic
+- 🔐 Secure API key handling via `.env` file
 
-## How predictions work
-- `load_model(model_name)`: loads `models/{model_name}.pkl`. If a dict is stored, it returns `(model, scaler, accuracy, f1)`.
-- `predict(model, input_data, scaler=None)`: prepares input, optionally scales it, calls `model.predict`, and returns class + probability (if `predict_proba` available).
+---
 
-## Gemini chat
-- `ChatWithAI.py` demonstrates usage of `google-genai` with a `GEMINI_API_KEY`. For production, set the key via environment variables and remove any hard-coded keys from source files.
-- In `app.py`, `chat_with_ai_doctor` streams content from the Gemini model (`gemini-2.5-flash` in the code).
+## 🧠 How It Works
 
-## Security notes
-- Never commit API keys or secrets. Use environment variables or a secrets manager.
-- Remove any hard-coded API key from `ChatWithAI.py` before committing.
+1. **Disease Prediction**:
+   - User inputs health metrics via sliders.
+   - ML model (loaded from `diabetes.pkl`) predicts diabetes risk.
+   - Probability score is displayed with styled feedback.
 
-## Contributing
-- Add models to `models/` following the expected pickle format.
-- Open issues or PRs for new disease modules, UI improvements, or chat integration.
+2. **Wellness Chat**:
+   - Gemini 2.5 Flash responds to user queries.
+   - AI provides health tips, lifestyle advice, and general wellness support.
 
-## License
-- Add a license file as needed.
+3. **Streamlit UI**:
+   - Sidebar toggle for chat mode.
+   - Expandable section for disease prediction.
+   - Styled feedback boxes for results.
+
+---
+
+## 🛠️ Requirements
+
+- Python 3.8+
+- Streamlit
+- NumPy
+- Pickle
+- python-dotenv
+- google-generativeai
+
+### 📦 Install Dependencies
+
+```bash
+pip install streamlit numpy python-dotenv google-
+```
+### 📁 Project Structure
+```
+Wellness-Guide-AI/
+├── models/
+│   └── diabetes.csv           # dataset
+│    └── diabetes.pkl           # Pre-trained ML model
+├── .env                       # Contains GEMINI_API_KEY
+├── app.py                     # Main Streamlit application
+├── module.py
+├── ChatWithAI.py
+├── requirements.txt           # Python dependencies
+└── README.md                  # Project documentation
+```
+## 👨‍💻 Author
+
+**Jakariya Khan**  
+B.Tech in Computer Science & Engineering (AI & ML)  
+Passionate about real-world AI applications, computer vision, and intelligent systems.
+
+- 📬 [LinkedIn](https://www.linkedin.com/in/jakariyakhan/)
+- 🐙 [GitHub](https://github.com/JakariyaKhan)
+
+**Shahe Aalam Ansari**  
+B.Tech in Computer Science & Engineering (AI & ML)  
+Passionate about real-world AI applications, computer vision, and intelligent systems.
+
+- 📬 [LinkedIn](https://www.linkedin.com/in/shaheaalam244/)
+- 🐙 [GitHub](https://github.com/shaheaalam244/)
+
+**Arshita Mishra**                
+B.Tech in Computer Science & Engineering (AI & ML)  
+Passionate about real-world AI applications, computer vision, and intelligent systems.
+
+- 📬 [LinkedIn](https://www.linkedin.com/in/arshita-mishra-4624aa333)
+- 🐙 [GitHub](https://github.com/arshita291)
+
+## 💬 Feedback & Contributions
+
+Contributions, suggestions, and feedback are welcome!
+
+If you find a bug, have an idea for improvement, or want to contribute to this project:
+- Open an issue
+- Submit a pull request
+- Reach out via [LinkedIn](https://www.linkedin.com/in/jakariyakhan/)
