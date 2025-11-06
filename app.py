@@ -1,4 +1,3 @@
-
 from dotenv import load_dotenv
 import os
 import streamlit as st
@@ -28,7 +27,6 @@ def load_model(model_name):
         st.error(f"⚠️ Error loading model '{model_name}': {e}")
         st.stop()
 
-
 def predict(model, input_data):
     """Make prediction and return label & probability"""
     input_array = np.asarray(input_data).reshape(1, -1)
@@ -40,15 +38,15 @@ def predict(model, input_data):
     return result, prob
 
 # -------------------------------
-# 🔹 Wellness Guide AI Chat Function
+# 🔹 WellAware AI Chat Function
 # -------------------------------
-def chat_with_wellness_guide(user_input):
+def chat_with_wellaware(user_input):
     """Send user input to Gemini AI and return the response"""
     client = genai.Client(api_key=GEMINI_API_KEY)
     model = "gemini-2.5-flash"
 
     system_instruction = (
-        "You are Wellness Guide AI (Wellness Guidance & Health Assistant), "
+        "You are WellAware AI (Health Assistant), "
         "created by TEAM ALBATROSS. "
         "You provide medical guidance, health advice, and general wellness information "
         "in a friendly and professional manner."
@@ -79,26 +77,26 @@ def chat_with_wellness_guide(user_input):
 # -------------------------------
 # 🔹 Streamlit Page Config
 # -------------------------------
-st.set_page_config(page_title="Wellness Guide AI", page_icon="🧠", layout="centered")
-st.markdown("<h1 style='text-align:center;color:#4B8BBE;'>🧠 Wellness Guide AI: Assistant</h1>",
+st.set_page_config(page_title="WellAware AI", page_icon="🧠", layout="centered")
+st.markdown("<h1 style='text-align:center;color:#4B8BBE;'>🧠 WellAware AI: Assistant</h1>",
             unsafe_allow_html=True)
-st.markdown("<p style='text-align:center;color:grey;'>Check your disease risk or chat with Wellness Guide AI</p>",
+st.markdown("<p style='text-align:center;color:grey;'>An AI-powered app for early Diabetes Risk Prediction</p>",
             unsafe_allow_html=True)
 st.markdown("---")
 
 # -------------------------------
 # 🔹 Sidebar: Chat Mode
 # -------------------------------
-chat_mode = st.sidebar.checkbox("💬 Chat with Wellness Guide AI")
+chat_mode = st.sidebar.checkbox("💬 Chat with WellAware AI")
 
 if chat_mode:
-    st.subheader("💬 Chat with Wellness Guide AI")
+    st.subheader("💬 Chat with WellAware AI")
     user_message = st.text_input("You:", "")
     if st.button("Send"):
         if user_message.strip() != "":
-            with st.spinner("Wellness Guide AI is thinking..."):
-                response = chat_with_wellness_guide(user_message)
-            st.markdown(f"**Wellness Guide AI:** {response}")
+            with st.spinner("WellAware AI is thinking..."):
+                response = chat_with_wellaware(user_message)
+            st.markdown(f"**WellAware AI:** {response}")
         else:
             st.warning("Please type a message to send.")
 else:
@@ -143,7 +141,6 @@ else:
                         <p style="color:black;">Probability: {prob:.2f}%</p>
                     </div>
                 """, unsafe_allow_html=True)
-
 
 # -------------------------------
 # Footer
