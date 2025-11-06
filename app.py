@@ -1,6 +1,20 @@
 import streamlit as st
+import numpy as np
+import pickle
+
 
 st.set_page_config(page_title="Dr. Disease Detector", page_icon="👨‍⚕️", layout="centered")
+
+@st.cache_resource
+def load_model(model_name):
+    try:
+        data = pickle.load(open(f"models/{model_name}.pkl", "rb"))
+        if isinstance(data, dict):
+            return data.get("model"), data.get("scaler"), data.get("accuracy"), data.get("f1")
+        return data, None, None, None
+    except Exception as e:
+        st.error(f"❌ Error loading model: {e}")
+        st.stop()
 
 st.markdown("""
 <style>
@@ -45,6 +59,18 @@ st.markdown("<h1 style='text-align:center;color:#4B8BBE; font-size:48px'>👨‍
 st.markdown("<p style='text-align:center;color:grey; font-size:20px'>A Smart Healthcare Solution Integrating Machine Learning and AI-Driven Chat Interaction</p>", unsafe_allow_html=True)
 st.markdown("---")
 
+def predict(model, input_data, scaler=None):
+    x = np.array(input_data).reshape(1, -1)
+    if scaler:
+        x = scaler.transform(x)
+    result = model.predict(x)[0]
+    prob = None
+    if hasattr(model, "predict_proba"):
+        prob = model.predict_proba(x)[0][1] * 100
+    return result, prob
+
+st.header("🩺 Disease Predictions")
+
 
 # ===== Sidebar =====
 st.sidebar.header("🩺 App Navigation")
@@ -52,10 +78,23 @@ mode = st.sidebar.radio("Choose Mode", ["Disease Prediction", "Chatbot (Coming S
 
 # ===== Main Section =====
 if mode == "Disease Prediction":
-    st.subheader("🩺 Disease Predictions")
 
     with st.expander("🩸 Diabetes Prediction", expanded=True):
-        st.write("👉 Input sliders will appear here...")
+        pregnancies = st.slider("Pregnancies", 0, 17, 0)
+        glucose = st.slider("Glucose", 0.0, 200.0, 99.0)
+        blood_pressure = st.slider("Blood Pressure", 0.0, 180.0, 72.0)
+        skin_thickness = st.slider("Skin Thickness", 0.0, 99.0, 20.0)
+        insulin = st.slider("Insulin", 0, 900, 50)
+        bmi = st.slider("BMI", 0.0, 50.0, 24.9)
+        dpf = st.slider("Diabetes Pedigree Function", 0.0, 2.5, 0.5)
+        age = st.slider("Age", 10, 100, 25)
+
+        if st.button("🔍 Predict Diabetes"):
+            model, _, _, _ = load_model("diabetes")
+            result, prob = predict(model,
+                                   [pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, dpf, age])
+            msg = "⚠️ Likely to have Diabetes" if result == 1 else "🎉 Not likely to have Diabetes"
+            st.success(f"{msg} | Probability: {prob:.2f}%")
 
     with st.expander("❤️ Heart Disease Prediction"):
         st.write("👉 Input sliders will appear here...")
@@ -75,4 +114,6 @@ Always consult a qualified doctor for final diagnosis.<br><br>
 <b> TEAM Albatross❤️</b>
 </p>
 """, unsafe_allow_html=True)
+
+
 
