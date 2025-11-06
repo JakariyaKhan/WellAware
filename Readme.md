@@ -1,11 +1,11 @@
-# 🧠 Wellness Guide AI: Disease Prediction & Health Assistant
+# 🧠 WellAware AI: Disease Prediction & Health Assistant
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Streamlit](https://img.shields.io/badge/Streamlit-App-red.svg)](https://streamlit.io/)
 [![Gemini AI](https://img.shields.io/badge/Gemini-2.5_Flash-green.svg)](https://ai.google.dev/)
 
-A smart, interactive health assistant built with Streamlit, Gemini AI, and machine learning. This project allows users to check their risk for diabetes and chat with a friendly AI wellness guide for health tips and medical advice.
+A smart, interactive health assistant built with Streamlit, Gemini AI, and machine learning. This project allows users to check their risk for diabetes and chat with a friendly AI wellaware AI for health tips and medical advice.
 
 ---
 
@@ -64,7 +64,7 @@ pip install streamlit numpy python-dotenv google-
 ```
 ### 📁 Project Structure
 ```
-Wellness-Guide-AI/
+WellAware/
 ├── models/
 │   └── diabetes.csv           # dataset
 │    └── diabetes.pkl           # Pre-trained ML model
