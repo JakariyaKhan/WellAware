@@ -1,6 +1,7 @@
-streamlit
-numpy
+numpy 
+streamlit 
+python-dotenv 
+pandas 
 scikit-learn
-pyttsx3
+pyttsx3 
 google-generativeai
-python-dotenv
